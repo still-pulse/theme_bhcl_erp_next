@@ -1,0 +1,20 @@
+[project]
+name = "bhcl_theme"
+authors = [
+    { name = "Gregory Cardoso", email = "gregorycardosogravinez@gmail.com"}
+]
+description = "Tema visual do Desk (CSS, login customizado, traducoes pt-BR) do Next BHCL"
+requires-python = ">=3.11"
+readme = "README.md"
+dynamic = ["version"]
+dependencies = [
+    # "frappe~=15.0.0" # Installed and managed by bench.
+]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+# These dependencies are only installed when developer mode is enabled
+[tool.bench.dev-dependencies]
+# package_name = "~=1.1.0"
