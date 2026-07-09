@@ -1,6 +1,19 @@
 # Changelog — bhcl_theme
 
-## v0.2.0 — 2026-07-09
+## v1.0.0 — 2026-07-09
+
+Histórico do repositório reescrito (orphan): um único commit limpo com o estado atual do tema (sem comentários longos de desenvolvimento). Tags `v0.2.x` removidas.
+
+Conteúdo:
+- Tema Desk (tokens teal, workspace, forms, badges)
+- Login customizado
+- Traduções pt-BR
+- Scripts de localização de workspaces
+- JS: pin Editar/+Novo no page-head
+
+## Histórico anterior (arquivado conceitualmente — commits antigos não existem mais no Git)
+
+### v0.2.0 — 2026-07-09
 
 ### Tema Desk v2
 - Design tokens completos (teal BHCL, surfaces, ink, borders)
