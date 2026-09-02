@@ -1,0 +1,197 @@
+/* ==========================================================================
+   BHCL — Check e Radio com miolo visível
+   Carrega depois de desk_theme.css. O tema genérico (.input-with-feedback)
+   forçava fundo branco / background-image:none no :checked/:focus, então
+   o campo Check (Desativado, Ativado, etc.) só ganhava a borda teal.
+   ========================================================================== */
+
+:root {
+	--bhcl-control-on: var(--bhcl-teal, var(--bhcl-teal-600, #0f7b72));
+	--bhcl-control-off: var(--bhcl-line-3, var(--border-color, #cfd8d4));
+	--bhcl-control-bg: var(--bhcl-white, #ffffff);
+}
+
+.form-layout input[type="checkbox"],
+.form-layout input[type="radio"],
+.modal-body input[type="checkbox"],
+.modal-body input[type="radio"],
+.modal input[type="checkbox"],
+.modal input[type="radio"],
+.dialog input[type="checkbox"],
+.dialog input[type="radio"],
+.grid-body input[type="checkbox"],
+.grid-heading-row input[type="checkbox"],
+.list-row input[type="checkbox"],
+.list-row-head input[type="checkbox"],
+.filter-section input[type="checkbox"],
+.checkbox input[type="checkbox"],
+.frappe-control[data-fieldtype="Check"] input,
+input[type="checkbox"].input-with-feedback,
+input[type="radio"].input-with-feedback,
+.form-layout .frappe-control .control-input > input[type="checkbox"],
+.form-layout .frappe-control .control-input > input[type="radio"],
+.modal-body .frappe-control .control-input > input[type="checkbox"],
+.modal-body .frappe-control .control-input > input[type="radio"] {
+	-webkit-appearance: none !important;
+	appearance: none !important;
+	width: 16px !important;
+	height: 16px !important;
+	min-width: 16px !important;
+	min-height: 16px !important;
+	max-width: 16px !important;
+	max-height: 16px !important;
+	padding: 0 !important;
+	margin: 0 8px 0 0 !important;
+	display: inline-block !important;
+	vertical-align: middle;
+	box-sizing: border-box !important;
+	cursor: pointer;
+	flex-shrink: 0;
+	background-color: var(--bhcl-control-bg) !important;
+	background-image: none !important;
+	background-size: 10px 10px !important;
+	background-position: center !important;
+	background-repeat: no-repeat !important;
+	border: 2px solid var(--bhcl-control-off) !important;
+	box-shadow: none !important;
+	accent-color: var(--bhcl-control-on);
+}
+
+.form-layout input[type="checkbox"],
+.modal-body input[type="checkbox"],
+.modal input[type="checkbox"],
+.dialog input[type="checkbox"],
+.grid-body input[type="checkbox"],
+.grid-heading-row input[type="checkbox"],
+.list-row input[type="checkbox"],
+.list-row-head input[type="checkbox"],
+.filter-section input[type="checkbox"],
+.checkbox input[type="checkbox"],
+.frappe-control[data-fieldtype="Check"] input,
+input[type="checkbox"].input-with-feedback,
+.form-layout .frappe-control .control-input > input[type="checkbox"],
+.modal-body .frappe-control .control-input > input[type="checkbox"] {
+	border-radius: 4px !important;
+}
+
+.form-layout input[type="radio"],
+.modal-body input[type="radio"],
+.modal input[type="radio"],
+.dialog input[type="radio"],
+input[type="radio"].input-with-feedback,
+.form-layout .frappe-control .control-input > input[type="radio"],
+.modal-body .frappe-control .control-input > input[type="radio"] {
+	border-radius: 50% !important;
+}
+
+/* Marcado: fundo teal + check branco (não pode perder pro :focus branco) */
+.form-layout input[type="checkbox"]:checked,
+.modal-body input[type="checkbox"]:checked,
+.modal input[type="checkbox"]:checked,
+.dialog input[type="checkbox"]:checked,
+.grid-body input[type="checkbox"]:checked,
+.grid-heading-row input[type="checkbox"]:checked,
+.list-row input[type="checkbox"]:checked,
+.list-row-head input[type="checkbox"]:checked,
+.filter-section input[type="checkbox"]:checked,
+.checkbox input[type="checkbox"]:checked,
+.frappe-control[data-fieldtype="Check"] input:checked,
+input[type="checkbox"].input-with-feedback:checked,
+.form-layout .frappe-control .control-input > input[type="checkbox"]:checked,
+.modal-body .frappe-control .control-input > input[type="checkbox"]:checked,
+.form-layout input[type="checkbox"]:checked:hover,
+.form-layout input[type="checkbox"]:checked:focus,
+.form-layout input[type="checkbox"]:checked:focus-visible,
+.modal-body input[type="checkbox"]:checked:hover,
+.modal-body input[type="checkbox"]:checked:focus,
+.frappe-control[data-fieldtype="Check"] input:checked:focus,
+input[type="checkbox"].input-with-feedback:checked:focus,
+.form-layout .frappe-control .control-input > input[type="checkbox"]:checked:focus,
+.modal-body .frappe-control .control-input > input[type="checkbox"]:checked:focus {
+	background-color: var(--bhcl-control-on) !important;
+	border-color: var(--bhcl-control-on) !important;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round' d='M3.2 8.3 6.6 11.6 12.8 4.4'/%3E%3C/svg%3E") !important;
+	background-size: 11px 11px !important;
+	box-shadow: none !important;
+}
+
+/* Radio marcado: anel teal + miolo preenchido */
+.form-layout input[type="radio"]:checked,
+.modal-body input[type="radio"]:checked,
+.modal input[type="radio"]:checked,
+.dialog input[type="radio"]:checked,
+input[type="radio"].input-with-feedback:checked,
+.form-layout .frappe-control .control-input > input[type="radio"]:checked,
+.modal-body .frappe-control .control-input > input[type="radio"]:checked,
+.form-layout input[type="radio"]:checked:hover,
+.form-layout input[type="radio"]:checked:focus,
+.form-layout input[type="radio"]:checked:focus-visible,
+.modal-body input[type="radio"]:checked:focus,
+input[type="radio"].input-with-feedback:checked:focus,
+.form-layout .frappe-control .control-input > input[type="radio"]:checked:focus,
+.modal-body .frappe-control .control-input > input[type="radio"]:checked:focus {
+	background-color: var(--bhcl-control-on) !important;
+	border-color: var(--bhcl-control-on) !important;
+	background-image: none !important;
+	box-shadow: inset 0 0 0 3px var(--bhcl-control-bg) !important;
+}
+
+input[type="checkbox"]:indeterminate,
+.form-layout input[type="checkbox"]:indeterminate,
+.list-row-head input[type="checkbox"]:indeterminate,
+.grid-heading-row input[type="checkbox"]:indeterminate {
+	background-color: var(--bhcl-control-on) !important;
+	border-color: var(--bhcl-control-on) !important;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-width='2.4' stroke-linecap='round' d='M3.5 8h9'/%3E%3C/svg%3E") !important;
+}
+
+.form-layout input[type="checkbox"]:hover:not(:checked):not(:disabled),
+.form-layout input[type="radio"]:hover:not(:checked):not(:disabled),
+.modal-body input[type="checkbox"]:hover:not(:checked):not(:disabled),
+.modal-body input[type="radio"]:hover:not(:checked):not(:disabled),
+.checkbox input[type="checkbox"]:hover:not(:checked):not(:disabled),
+.frappe-control[data-fieldtype="Check"] input:hover:not(:checked):not(:disabled) {
+	border-color: var(--bhcl-control-on) !important;
+	background-color: var(--bhcl-control-bg) !important;
+}
+
+.form-layout input[type="checkbox"]:focus:not(:checked),
+.form-layout input[type="radio"]:focus:not(:checked),
+.modal-body input[type="checkbox"]:focus:not(:checked),
+.modal-body input[type="radio"]:focus:not(:checked),
+.frappe-control[data-fieldtype="Check"] input:focus:not(:checked),
+input[type="checkbox"].input-with-feedback:focus:not(:checked),
+input[type="radio"].input-with-feedback:focus:not(:checked) {
+	border-color: var(--bhcl-control-on) !important;
+	background-color: var(--bhcl-control-bg) !important;
+	box-shadow: var(--focus-default, 0 0 0 3px rgba(15, 123, 114, 0.22)) !important;
+	outline: none !important;
+}
+
+.form-layout input[type="checkbox"]:checked:focus,
+.modal-body input[type="checkbox"]:checked:focus,
+.frappe-control[data-fieldtype="Check"] input:checked:focus,
+input[type="checkbox"].input-with-feedback:checked:focus {
+	outline: none !important;
+	box-shadow: var(--focus-default, 0 0 0 3px rgba(15, 123, 114, 0.22)) !important;
+}
+
+.form-layout input[type="radio"]:checked:focus,
+.modal-body input[type="radio"]:checked:focus,
+input[type="radio"].input-with-feedback:checked:focus,
+.form-layout .frappe-control .control-input > input[type="radio"]:checked:focus,
+.modal-body .frappe-control .control-input > input[type="radio"]:checked:focus {
+	outline: none !important;
+	box-shadow:
+		inset 0 0 0 3px var(--bhcl-control-bg),
+		var(--focus-default, 0 0 0 3px rgba(15, 123, 114, 0.22)) !important;
+}
+
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled,
+.form-layout input[type="checkbox"]:disabled,
+.form-layout input[type="radio"]:disabled,
+.frappe-control[data-fieldtype="Check"] input:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
