@@ -5,5 +5,8 @@ app_description = "Tema visual do Desk (CSS, login customizado, traducoes pt-BR)
 app_email = "gregorycardosogravinez@gmail.com"
 app_license = "mit"
 
-app_include_css = "/assets/bhcl_theme/css/desk_theme.css"
-app_include_js = "/assets/bhcl_theme/js/desk_theme.js"
+app_include_css = [
+	"/assets/bhcl_theme/css/desk_theme.css?v=20260902a",
+	"/assets/bhcl_theme/css/desk_controls.css?v=20260902a",
+]
+app_include_js = "/assets/bhcl_theme/js/desk_theme.js?v=20260902a"
