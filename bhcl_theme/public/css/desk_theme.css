@@ -862,3 +862,119 @@ body::after {
 		transform: none;
 	}
 }
+
+/* Notificações: badge numérico, sino que balança uma vez e faixa de itens que pedem ação */
+.navbar .notifications-icon {
+	position: relative;
+}
+
+.bhcl-notif-badge {
+	position: absolute;
+	top: -8px;
+	right: -11px;
+	min-width: 16px;
+	height: 16px;
+	padding: 0 4px;
+	border-radius: 8px;
+	background: var(--red-500);
+	color: #fff;
+	font-size: 10px;
+	font-weight: 600;
+	line-height: 16px;
+	text-align: center;
+	box-shadow: 0 0 0 2px var(--navbar-bg, var(--bhcl-white));
+	pointer-events: none;
+}
+
+/* com contagem visível, o pontinho do ícone "unseen" fica redundante */
+.navbar .notifications-icon:has(.bhcl-notif-badge) .notifications-unseen {
+	display: none !important;
+}
+.navbar .notifications-icon:has(.bhcl-notif-badge) .notifications-seen {
+	display: inline !important;
+}
+
+.bhcl-bell-ring svg {
+	transform-origin: 50% 10%;
+	animation: bhcl-bell-ring 0.7s ease-in-out 1;
+}
+
+@keyframes bhcl-bell-ring {
+	0%,
+	100% {
+		transform: rotate(0);
+	}
+	20% {
+		transform: rotate(14deg);
+	}
+	40% {
+		transform: rotate(-12deg);
+	}
+	60% {
+		transform: rotate(8deg);
+	}
+	80% {
+		transform: rotate(-4deg);
+	}
+}
+
+body.bhcl-has-action-bar {
+	--navbar-height: calc(76px + 40px);
+}
+
+.bhcl-action-bar {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	height: 40px;
+	padding: 0 24px;
+	background: var(--bg-orange);
+	color: var(--text-on-orange);
+	border-bottom: 1px solid var(--border-color);
+	font-size: 13px;
+}
+
+.bhcl-action-bar-icon {
+	display: inline-flex;
+	--icon-stroke: currentColor;
+}
+
+.bhcl-action-bar-text {
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-weight: 500;
+}
+
+.bhcl-action-close {
+	display: inline-flex;
+	padding: 4px;
+	--icon-stroke: currentColor;
+	opacity: 0.7;
+}
+.bhcl-action-close:hover {
+	opacity: 1;
+}
+
+@media (max-width: 575px) {
+	.bhcl-action-bar {
+		padding: 0 16px;
+	}
+	.bhcl-action-snooze {
+		display: none;
+	}
+}
+
+.bhcl-notif-toast,
+.bhcl-notif-toast:hover {
+	color: inherit;
+	text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bhcl-bell-ring svg {
+		animation: none;
+	}
+}
