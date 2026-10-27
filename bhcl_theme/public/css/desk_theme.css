@@ -652,7 +652,8 @@ body {
 	border: 1px solid var(--border-color);
 	box-shadow: var(--shadow-lg);
 	padding: 6px;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
 	background: var(--bhcl-white);
 }
 
@@ -745,11 +746,11 @@ body {
 	border: 1px solid var(--bhcl-line) !important;
 	border-radius: 16px !important;
 	box-shadow: var(--shadow-lg) !important;
-	overflow: hidden;
 }
 
 .modal-header {
 	border-bottom: 1px solid var(--bhcl-line);
+	border-radius: 15px 15px 0 0;
 	padding: 16px 20px;
 	background: var(--bhcl-white);
 }
@@ -766,6 +767,7 @@ body {
 
 .modal-footer {
 	border-top: 1px solid var(--bhcl-line);
+	border-radius: 0 0 15px 15px;
 	padding: 12px 20px;
 	background: var(--bhcl-surface-2);
 }
