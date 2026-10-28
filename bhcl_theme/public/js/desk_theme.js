@@ -189,6 +189,7 @@
 		}
 
 		$bar.data("latest", latest);
+		$bar.data("actions", actions);
 		$bar
 			.find(".bhcl-action-bar-text")
 			.text(
@@ -272,15 +273,49 @@
 		});
 	}
 
-	function open_dropdown() {
-		var $bell = bell();
-		if (!$bell.closest(".dropdown").hasClass("show")) $bell.dropdown("toggle");
+	function go_to(url) {
+		if (/^(https?:)?\/\//.test(url) || url.charAt(0) === "/") {
+			window.location.href = url;
+		} else {
+			frappe.set_route(url);
+		}
+	}
+
+	function open_list() {
+		frappe.set_route("List", "Notification Log", { read: 0 });
+		schedule_refresh(800);
+	}
+
+	function open_actions(actions) {
+		if (actions.length !== 1) return open_list();
+		var log = actions[0];
+		frappe.call({
+			method: "frappe.desk.doctype.notification_log.notification_log.mark_as_read",
+			args: { docname: log.name },
+			callback: function () {
+				schedule_refresh(300);
+			},
+		});
+		go_to(log_link(log));
+	}
+
+	// O core guarda em route_titles o título já prefixado e o devolve ao voltar à rota, o que
+	// empilha "(1) (1) ...". Removemos prefixos de contagem recebidos para o prefixo ser único.
+	function patch_set_title() {
+		if (frappe.utils._bhcl_set_title_patched) return;
+		frappe.utils._bhcl_set_title_patched = true;
+		var original = frappe.utils.set_title;
+		frappe.utils.set_title = function (title) {
+			if (typeof title === "string") title = title.replace(/^(\(\d+\+?\)\s*)+/, "");
+			return original.call(frappe.utils, title);
+		};
 	}
 
 	function setup() {
 		if (!frappe.session || frappe.session.user === "Guest" || !frappe.realtime) return;
 		// sem o sino (notificações desligadas nas Desk Settings) não há o que destacar
 		if (!bell().length) return;
+		patch_set_title();
 
 		frappe.realtime.on("notification", on_new_notification);
 		frappe.realtime.on("indicator_hide", function () {
@@ -297,7 +332,7 @@
 		});
 
 		$(document).on("click", ".bhcl-action-open", function () {
-			open_dropdown();
+			open_actions($(".bhcl-action-bar").data("actions") || []);
 		});
 		$(document).on("click", ".bhcl-action-snooze", function () {
 			var latest = $(".bhcl-action-bar").data("latest");
@@ -310,7 +345,7 @@
 		});
 		$(document).on("click", "[data-bhcl-open-notifications]", function (e) {
 			e.preventDefault();
-			open_dropdown();
+			open_list();
 		});
 		$(document).on("animationend", ".bhcl-bell-ring", function () {
 			$(this).removeClass("bhcl-bell-ring");
