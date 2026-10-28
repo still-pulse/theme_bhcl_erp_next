@@ -147,7 +147,10 @@
 			"aria-label",
 			count ? __("Notificações: {0} não lidas", [count]) : __("Notificações"),
 		);
-		frappe.utils.set_title_prefix(count ? "(" + (count >= 100 ? "99+" : count) + ")" : "");
+		var prefix = count ? "(" + (count >= 100 ? "99+" : count) + ")" : "";
+		// antes do primeiro set_title não há título a reaplicar: o core quebraria em undefined.replace
+		if (frappe._original_title === undefined) frappe._title_prefix = prefix;
+		else frappe.utils.set_title_prefix(prefix);
 	}
 
 	// O adiamento/fechamento vale para o conjunto atual: um item novo que pede ação reabre a faixa.
@@ -306,7 +309,8 @@
 		frappe.utils._bhcl_set_title_patched = true;
 		var original = frappe.utils.set_title;
 		frappe.utils.set_title = function (title) {
-			if (typeof title === "string") title = title.replace(/^(\(\d+\+?\)\s*)+/, "");
+			if (typeof title !== "string") title = document.title || "";
+			title = title.replace(/^(\(\d+\+?\)\s*)+/, "");
 			return original.call(frappe.utils, title);
 		};
 	}

@@ -6,7 +6,7 @@ app_email = "gregorycardosogravinez@gmail.com"
 app_license = "mit"
 
 app_include_css = [
-	"/assets/bhcl_theme/css/desk_theme.css?v=20261027a",
-	"/assets/bhcl_theme/css/desk_controls.css?v=20261027a",
+	"/assets/bhcl_theme/css/desk_theme.css?v=20261028a",
+	"/assets/bhcl_theme/css/desk_controls.css?v=20261028a",
 ]
-app_include_js = "/assets/bhcl_theme/js/desk_theme.js?v=20261027a"
+app_include_js = "/assets/bhcl_theme/js/desk_theme.js?v=20261028a"
