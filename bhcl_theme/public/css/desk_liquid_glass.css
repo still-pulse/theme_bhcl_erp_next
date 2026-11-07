@@ -565,11 +565,42 @@ body {
 [data-theme="dark"] .form-control,
 [data-theme="dark"] .input-with-feedback,
 [data-theme="dark"] select.form-control,
+[data-theme="dark"] textarea.form-control,
 [data-theme="dark"] .navbar .search-bar input,
 [data-theme="dark"] .navbar #navbar-search {
 	background: var(--control-bg) !important;
 	color: var(--bhcl-ink) !important;
 	border-color: var(--bhcl-line) !important;
+}
+
+/* Hover/focus do desk_theme.css forçam fundo claro (#e8ecea / branco) —
+   no dark isso apaga o texto. Mantém contraste escuro + borda teal. */
+[data-theme="dark"] .form-layout .input-with-feedback:hover,
+[data-theme="dark"] .form-layout .frappe-control .control-input > .form-control:hover,
+[data-theme="dark"] .form-layout .frappe-control .control-input > input:hover,
+[data-theme="dark"] .form-layout .frappe-control .control-input > select:hover,
+[data-theme="dark"] .form-layout .frappe-control .control-input > textarea:hover,
+[data-theme="dark"] .modal-body .input-with-feedback:hover,
+[data-theme="dark"] .modal-body .frappe-control .control-input > .form-control:hover,
+[data-theme="dark"] .modal-body .frappe-control .control-input > textarea:hover {
+	background-color: color-mix(in srgb, var(--control-bg) 88%, var(--bhcl-teal-400)) !important;
+	color: var(--bhcl-ink) !important;
+	border-color: var(--bhcl-teal-400) !important;
+}
+
+[data-theme="dark"] .form-layout .input-with-feedback:focus,
+[data-theme="dark"] .form-layout .frappe-control .control-input > .form-control:focus,
+[data-theme="dark"] .form-layout .frappe-control .control-input > input:focus,
+[data-theme="dark"] .form-layout .frappe-control .control-input > select:focus,
+[data-theme="dark"] .form-layout .frappe-control .control-input > textarea:focus,
+[data-theme="dark"] .form-layout .frappe-control .ql-editor:not(.read-mode):focus,
+[data-theme="dark"] .modal-body .input-with-feedback:focus,
+[data-theme="dark"] .modal-body .frappe-control .control-input > .form-control:focus,
+[data-theme="dark"] .modal-body .frappe-control .control-input > input:focus,
+[data-theme="dark"] .modal-body .frappe-control .control-input > textarea:focus {
+	background-color: var(--control-bg) !important;
+	color: var(--bhcl-ink) !important;
+	border-color: var(--bhcl-teal-400) !important;
 }
 
 [data-theme="dark"] .navbar .search-bar input::placeholder,
