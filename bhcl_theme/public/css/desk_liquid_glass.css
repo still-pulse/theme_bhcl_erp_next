@@ -1,0 +1,780 @@
+/* Experimento Desk Liquid Glass (v2.x).
+   Espelha tokens glass/teal do portal (bhcl_site) sem carregar o CSS do portal.
+   Escopo: chrome, menus jateados, cards, canvas + tema escuro. */
+
+:root,
+[data-theme="light"] {
+	--bhcl-teal-50: #effaf8;
+	--bhcl-teal-100: #ddf4f1;
+	--bhcl-teal-200: #b8e9e3;
+	--bhcl-teal-300: #80d7ce;
+	--bhcl-teal-400: #39c1b5;
+	--bhcl-teal-500: #0aaea2;
+	--bhcl-teal-600: #098d84;
+	--bhcl-teal-700: #08736d;
+	--bhcl-teal-800: #075b57;
+	--bhcl-teal-900: #064643;
+
+	--bhcl-gray-50: #f8f9fa;
+	--bhcl-gray-100: #f1f3f5;
+	--bhcl-gray-200: #e3e8ea;
+	--bhcl-gray-900: #111111;
+
+	/* Chrome (navbar/sidebar/page-head) */
+	--bhcl-glass: rgb(255 255 255 / 42%);
+	/* Menus: leitoso/jateado — translúcido mas legível (não fantasma) */
+	--bhcl-glass-menu: rgb(255 255 255 / 78%);
+	--bhcl-glass-menu-fallback: rgb(255 255 255 / 94%);
+	--bhcl-glass-border: rgb(255 255 255 / 70%);
+	--bhcl-glass-highlight: rgb(255 255 255 / 85%);
+	--bhcl-shadow-glass: 0 16px 40px rgb(7 16 18 / 10%);
+	--bhcl-scrim: rgb(7 16 18 / 45%);
+	--bhcl-canvas: var(--bhcl-gray-100);
+	--bhcl-widget-bg: rgb(255 255 255 / 62%);
+	--bhcl-ink: #0f172a;
+	--bhcl-ink-soft: #1e293b;
+	--bhcl-muted: #64748b;
+
+	--bhcl-radius-lg: 12px;
+	--bhcl-radius-xl: 16px;
+	--bhcl-duration-normal: 200ms;
+	--bhcl-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+	--bhcl-blur-chrome: saturate(1.45) blur(22px);
+	--bhcl-blur-menu: saturate(1.55) blur(24px);
+
+	--primary: var(--bhcl-teal-700);
+	--primary-color: var(--bhcl-teal-700);
+	--brand-color: var(--bhcl-teal-500);
+	--btn-primary: var(--bhcl-teal-700);
+	--border-primary: var(--bhcl-teal-700);
+	--bg-color: var(--bhcl-canvas);
+	--navbar-bg: transparent;
+	--card-bg: var(--bhcl-widget-bg);
+	--modal-bg: var(--bhcl-glass-menu);
+	--popover-bg: var(--bhcl-glass-menu);
+	--fg-color: var(--bhcl-glass-menu);
+	--card-shadow: var(--bhcl-shadow-glass);
+	--drop-shadow: var(--bhcl-shadow-glass);
+	--awesomplete-hover-bg: color-mix(in srgb, var(--bhcl-teal-100) 70%, transparent);
+	--focus-default: 0 0 0 3px color-mix(in srgb, var(--bhcl-teal-700) 28%, transparent);
+	--focus-ring: 0 0 0 2px #fff, 0 0 0 4px color-mix(in srgb, var(--bhcl-teal-700) 35%, transparent);
+	--text-color: var(--bhcl-ink-soft);
+	--heading-color: var(--bhcl-ink);
+	--text-muted: var(--bhcl-muted);
+}
+
+/* ---------- Dark mode ----------
+   Revisão: contraste alto, superfícies elevadas claras o bastante para ler,
+   e remapeamento dos tokens do desk_theme.css (--bhcl-white/ink/line/surface)
+   que no claro quebram a legibilidade no escuro. */
+
+[data-theme="dark"] {
+	color-scheme: dark;
+
+	--bhcl-teal-50: #102826;
+	--bhcl-teal-100: #163532;
+	--bhcl-teal-200: #1f4a45;
+	--bhcl-teal-300: #2a6f67;
+	--bhcl-teal-400: #2fbfb0;
+	--bhcl-teal-500: #3dd6c6;
+	--bhcl-teal-600: #5ee0d2;
+	--bhcl-teal-700: #8aebe0;
+	--bhcl-teal-800: #b6f3ec;
+	--bhcl-teal-900: #e4fbf8;
+
+	--bhcl-gray-50: #141a1e;
+	--bhcl-gray-100: #1a2227;
+	--bhcl-gray-200: #2c3a41;
+	--bhcl-gray-900: #f2f6f7;
+
+	/* Tokens do desk_theme.css (antes ficavam claros e “sujavam” o escuro) */
+	--bhcl-white: #1e272c;
+	--bhcl-ink: #f2f6f7;
+	--bhcl-ink-soft: #d7e0e4;
+	--bhcl-muted: #9aadb5;
+	--bhcl-muted-2: #b7c6cc;
+	--bhcl-line: #334249;
+	--bhcl-line-strong: #45565e;
+	--bhcl-surface: #12181c;
+	--bhcl-surface-2: #1a2227;
+
+	--bhcl-glass: rgb(30 39 44 / 72%);
+	--bhcl-glass-menu: rgb(26 34 38 / 88%);
+	--bhcl-glass-menu-fallback: rgb(26 34 38 / 96%);
+	--bhcl-glass-border: rgb(255 255 255 / 14%);
+	--bhcl-glass-highlight: rgb(255 255 255 / 8%);
+	--bhcl-shadow-glass: 0 12px 32px rgb(0 0 0 / 40%);
+	--bhcl-scrim: rgb(0 0 0 / 58%);
+	--bhcl-canvas: #0e1316;
+	--bhcl-widget-bg: rgb(34 44 49 / 88%);
+
+	--primary: var(--bhcl-teal-400);
+	--primary-color: var(--bhcl-teal-400);
+	--brand-color: var(--bhcl-teal-500);
+	--btn-primary: var(--bhcl-teal-400);
+	--border-primary: var(--bhcl-teal-400);
+	--bg-color: var(--bhcl-canvas);
+	--navbar-bg: transparent;
+	--card-bg: var(--bhcl-widget-bg);
+	--modal-bg: var(--bhcl-glass-menu);
+	--popover-bg: var(--bhcl-glass-menu);
+	--fg-color: var(--bhcl-widget-bg);
+	--fg-hover-color: color-mix(in srgb, var(--bhcl-teal-100) 70%, transparent);
+	--subtle-fg: #1a2227;
+	--control-bg: #243036;
+	--control-bg-on-gray: #2a383f;
+	--disabled-control-bg: #1a2227;
+	--disabled-text-color: #7d9098;
+	--awesomplete-hover-bg: color-mix(in srgb, var(--bhcl-teal-100) 80%, transparent);
+	--border-color: var(--bhcl-line);
+	--dark-border-color: var(--bhcl-line-strong);
+	--table-border-color: var(--bhcl-line);
+	--text-color: var(--bhcl-ink-soft);
+	--heading-color: var(--bhcl-ink);
+	--text-muted: var(--bhcl-muted);
+	--text-light: var(--bhcl-muted);
+	--icon-stroke: var(--bhcl-muted-2);
+	--focus-default: 0 0 0 3px color-mix(in srgb, var(--bhcl-teal-400) 40%, transparent);
+	--focus-ring: 0 0 0 2px var(--bhcl-canvas), 0 0 0 4px color-mix(in srgb, var(--bhcl-teal-400) 45%, transparent);
+
+	/* Alertas Frappe menos gritantes no escuro */
+	--bg-orange: #3d2a14;
+	--text-on-orange: #ffd7a8;
+	--alert-bg-warning: #3d2a14;
+	--alert-text-warning: #ffd7a8;
+}
+
+/* ---------- Canvas ambiental ---------- */
+
+body.full-width,
+body {
+	background-color: var(--bhcl-canvas);
+	background-image:
+		radial-gradient(
+			ellipse 54rem 36rem at 8% 5%,
+			color-mix(in srgb, var(--bhcl-teal-200) 55%, transparent),
+			transparent 78%
+		),
+		radial-gradient(
+			ellipse 48rem 34rem at 90% 48%,
+			color-mix(in srgb, var(--bhcl-teal-50) 80%, transparent),
+			transparent 82%
+		),
+		linear-gradient(135deg, var(--bhcl-canvas), var(--bhcl-gray-50));
+	background-attachment: fixed;
+	color: var(--bhcl-ink-soft);
+}
+
+[data-theme="dark"] body.full-width,
+[data-theme="dark"] body {
+	background-color: var(--bhcl-canvas);
+	background-image:
+		radial-gradient(
+			ellipse 48rem 32rem at 12% -4%,
+			color-mix(in srgb, var(--bhcl-teal-400) 14%, transparent),
+			transparent 70%
+		),
+		radial-gradient(
+			ellipse 40rem 28rem at 88% 55%,
+			color-mix(in srgb, var(--bhcl-teal-300) 10%, transparent),
+			transparent 72%
+		),
+		linear-gradient(165deg, #0a0e10 0%, var(--bhcl-canvas) 42%, #12191d 100%);
+}
+
+.page-container,
+.layout-main-section-wrapper,
+#body,
+.desk-body {
+	background: transparent;
+}
+
+/* ---------- Superfície glass (chrome) ---------- */
+
+.navbar,
+.page-head,
+.layout-side-section,
+.widget,
+#page-Workspaces .widget,
+.modal-content {
+	border-color: color-mix(in srgb, var(--bhcl-gray-200) 65%, var(--bhcl-glass-border)) !important;
+	box-shadow: var(--bhcl-shadow-glass), inset 0 1px 0 var(--bhcl-glass-highlight) !important;
+	transition:
+		background var(--bhcl-duration-normal) var(--bhcl-ease-standard),
+		box-shadow var(--bhcl-duration-normal) var(--bhcl-ease-standard),
+		border-color var(--bhcl-duration-normal) var(--bhcl-ease-standard);
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+	.navbar,
+	.page-head,
+	.layout-side-section {
+		background: var(--bhcl-glass) !important;
+		-webkit-backdrop-filter: var(--bhcl-blur-chrome);
+		backdrop-filter: var(--bhcl-blur-chrome);
+	}
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+	.navbar,
+	.page-head,
+	.layout-side-section {
+		background: var(--bhcl-glass-menu-fallback) !important;
+	}
+}
+
+/* ---------- Menus jateados (dropdown / popover / awesomplete / modal) ---------- */
+
+.dropdown-menu,
+.popover,
+.modal-content,
+.awesomplete > ul,
+.datepicker,
+.autocomplete,
+.form-control.awesomplete > ul {
+	border-color: color-mix(in srgb, var(--bhcl-gray-200) 45%, var(--bhcl-glass-border)) !important;
+	box-shadow: var(--bhcl-shadow-glass), inset 0 1px 0 var(--bhcl-glass-highlight) !important;
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+	.dropdown-menu,
+	.popover,
+	.modal-content,
+	.awesomplete > ul,
+	#toolbar-user,
+	.dropdown-navbar-user .dropdown-menu,
+	.navbar .dropdown-menu {
+		/* Gradiente leitoso + base translúcida; blur jateia o que passa atrás */
+		background:
+			linear-gradient(180deg, rgb(255 255 255 / 72%), rgb(255 255 255 / 58%)),
+			var(--bhcl-glass-menu) !important;
+		-webkit-backdrop-filter: var(--bhcl-blur-menu) !important;
+		backdrop-filter: var(--bhcl-blur-menu) !important;
+	}
+
+	[data-theme="dark"] .dropdown-menu,
+	[data-theme="dark"] .popover,
+	[data-theme="dark"] .modal-content,
+	[data-theme="dark"] .awesomplete > ul,
+	[data-theme="dark"] #toolbar-user,
+	[data-theme="dark"] .navbar .dropdown-menu {
+		background:
+			linear-gradient(180deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 3%)),
+			var(--bhcl-glass-menu) !important;
+		-webkit-backdrop-filter: var(--bhcl-blur-menu) !important;
+		backdrop-filter: var(--bhcl-blur-menu) !important;
+	}
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+	.dropdown-menu,
+	.popover,
+	.modal-content,
+	.awesomplete > ul,
+	#toolbar-user,
+	.dropdown-navbar-user .dropdown-menu,
+	.navbar .dropdown-menu {
+		background: var(--bhcl-glass-menu-fallback) !important;
+		background-color: var(--bhcl-glass-menu-fallback) !important;
+	}
+}
+
+.dropdown-menu {
+	border-radius: var(--bhcl-radius-lg) !important;
+	padding: 6px !important;
+	overflow: hidden;
+}
+
+.popover {
+	border-radius: var(--bhcl-radius-lg);
+	overflow: hidden;
+}
+
+.dropdown-item {
+	border-radius: 8px;
+	color: var(--bhcl-ink-soft);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item:active,
+.dropdown-item.active {
+	background: color-mix(in srgb, var(--bhcl-teal-100) 70%, transparent) !important;
+	color: var(--bhcl-teal-800) !important;
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus,
+[data-theme="dark"] .dropdown-item:active,
+[data-theme="dark"] .dropdown-item.active {
+	color: var(--bhcl-teal-800) !important;
+}
+
+.awesomplete > ul {
+	border-radius: var(--bhcl-radius-lg) !important;
+	overflow: hidden;
+}
+
+.awesomplete > ul > li {
+	border-radius: 8px;
+}
+
+.awesomplete > ul > li[aria-selected="true"],
+.awesomplete > ul > li:hover {
+	background: color-mix(in srgb, var(--bhcl-teal-100) 75%, transparent) !important;
+	color: var(--bhcl-ink) !important;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+	height: 76px;
+	border-bottom: 1px solid color-mix(in srgb, var(--bhcl-gray-200) 70%, transparent);
+	background-clip: padding-box;
+}
+
+.navbar .search-bar input,
+.navbar #navbar-search {
+	background: color-mix(in srgb, var(--bhcl-glass-menu) 80%, transparent);
+	border-color: color-mix(in srgb, var(--bhcl-gray-200) 70%, var(--bhcl-teal-200));
+	color: var(--bhcl-ink-soft);
+}
+
+.navbar .search-bar input:focus,
+.navbar #navbar-search:focus {
+	background: color-mix(in srgb, var(--bhcl-glass) 90%, transparent);
+	border-color: var(--bhcl-teal-300);
+}
+
+.navbar .nav-link,
+.navbar .dropdown-toggle {
+	color: var(--bhcl-muted);
+}
+
+.navbar .nav-link:hover,
+.navbar .dropdown-toggle:hover {
+	background: color-mix(in srgb, var(--bhcl-teal-100) 55%, transparent);
+	color: var(--bhcl-ink-soft);
+}
+
+.navbar .avatar .standard-image,
+.navbar .avatar .avatar-frame {
+	background: linear-gradient(135deg, var(--bhcl-teal-700), var(--bhcl-teal-500)) !important;
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--bhcl-glass-highlight) 80%, transparent),
+		0 0 0 3px color-mix(in srgb, var(--bhcl-teal-500) 35%, transparent);
+}
+
+/* ---------- Sidebar ---------- */
+
+.layout-side-section {
+	border-right: 1px solid color-mix(in srgb, var(--bhcl-gray-200) 70%, transparent);
+	background-clip: padding-box;
+}
+
+.desk-sidebar .standard-sidebar-item:hover {
+	background-color: color-mix(in srgb, var(--bhcl-teal-100) 55%, transparent);
+}
+
+.desk-sidebar .standard-sidebar-item.selected {
+	background-color: color-mix(in srgb, var(--bhcl-teal-100) 75%, transparent);
+	--icon-stroke: var(--bhcl-teal-600);
+	box-shadow: inset 3px 0 0 var(--bhcl-teal-500);
+}
+
+.desk-sidebar .standard-sidebar-item.selected .sidebar-item-label {
+	color: var(--bhcl-teal-700);
+}
+
+.desk-sidebar .standard-sidebar-label {
+	color: var(--bhcl-muted);
+}
+
+/* ---------- Page head ---------- */
+
+.page-head {
+	border-bottom: 1px solid color-mix(in srgb, var(--bhcl-gray-200) 70%, transparent);
+	background-clip: padding-box;
+}
+
+.page-head.drop-shadow {
+	box-shadow: var(--bhcl-shadow-glass), inset 0 1px 0 var(--bhcl-glass-highlight) !important;
+}
+
+.page-head .sidebar-toggle-btn {
+	background: color-mix(in srgb, var(--bhcl-glass-menu) 70%, transparent);
+	border: 1px solid color-mix(in srgb, var(--bhcl-gray-200) 70%, transparent);
+	border-radius: var(--bhcl-radius-lg);
+	color: var(--bhcl-ink-soft);
+}
+
+.page-head .sidebar-toggle-btn:hover {
+	background: color-mix(in srgb, var(--bhcl-teal-100) 60%, transparent);
+}
+
+.title-area .title-text {
+	color: var(--bhcl-ink);
+}
+
+/* ---------- Workspace / cards ---------- */
+
+/*
+ * Widgets sem backdrop-filter (clip de tooltips de gráfico).
+ * Fundo translúcido + sombra mantém o look glass.
+ */
+.widget,
+#page-Workspaces .widget {
+	position: relative;
+	border-radius: var(--bhcl-radius-xl) !important;
+	overflow: visible !important;
+	background: var(--bhcl-widget-bg) !important;
+	-webkit-backdrop-filter: none !important;
+	backdrop-filter: none !important;
+	color: var(--bhcl-ink-soft);
+}
+
+.widget .chart-container,
+.widget .frappe-chart,
+.widget .widget-body,
+.widget .frappe-chart > *,
+.chart-container {
+	overflow: visible !important;
+}
+
+.widget.dashboard-widget-box .widget-head {
+	position: relative;
+	z-index: 1;
+}
+
+.widget.dashboard-widget-box .widget-body {
+	position: relative;
+	z-index: 2;
+}
+
+.widget.dashboard-widget-box:hover {
+	z-index: 5;
+}
+
+.graph-svg-tip {
+	z-index: 99999 !important;
+	pointer-events: none;
+}
+
+/* Spacer: só respiro */
+.widget.spacer,
+#page-Workspaces .widget.spacer {
+	height: 10px !important;
+	min-height: 10px !important;
+	margin: 2px 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	-webkit-backdrop-filter: none !important;
+	backdrop-filter: none !important;
+	overflow: visible !important;
+	pointer-events: none;
+}
+
+.widget.spacer:hover,
+#page-Workspaces .widget.spacer:hover {
+	background: transparent !important;
+	box-shadow: none !important;
+	border: 0 !important;
+}
+
+.widget-group.edit-mode .widget.spacer,
+.codex-editor .widget.spacer[contenteditable],
+[data-disabled="false"] .widget.spacer {
+	pointer-events: auto;
+	border: 1px dashed color-mix(in srgb, var(--bhcl-gray-200) 70%, transparent) !important;
+	border-radius: 6px !important;
+	background: color-mix(in srgb, var(--bhcl-teal-50) 35%, transparent) !important;
+	box-shadow: none !important;
+}
+
+#page-Workspaces .widget.shortcut-widget-box:hover,
+.widget:not(.spacer):hover {
+	box-shadow:
+		0 20px 48px color-mix(in srgb, var(--bhcl-ink) 12%, transparent),
+		inset 0 1px 0 var(--bhcl-glass-highlight) !important;
+	border-color: color-mix(in srgb, var(--bhcl-teal-200) 55%, var(--bhcl-glass-border)) !important;
+}
+
+.widget.links-widget-box .link-item:hover {
+	background: color-mix(in srgb, var(--bhcl-teal-100) 55%, transparent);
+}
+
+/* Form / list: translúcido sem blur */
+.layout-main-section,
+.form-layout,
+.list-row-container,
+.frappe-card {
+	background: var(--bhcl-widget-bg);
+	border-radius: var(--bhcl-radius-xl);
+	box-shadow: var(--bhcl-shadow-glass), inset 0 1px 0 var(--bhcl-glass-highlight);
+	border: 1px solid color-mix(in srgb, var(--bhcl-gray-200) 70%, var(--bhcl-glass-border));
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
+	overflow: visible;
+	color: var(--bhcl-ink-soft);
+}
+
+/* ---------- Modais ---------- */
+
+.modal-content {
+	border-radius: var(--bhcl-radius-xl) !important;
+	overflow: hidden;
+	color: var(--bhcl-ink-soft);
+}
+
+.modal-header {
+	background: transparent !important;
+	border-bottom-color: color-mix(in srgb, var(--bhcl-gray-200) 55%, transparent);
+}
+
+.modal-title {
+	color: var(--bhcl-ink);
+}
+
+.modal-footer {
+	background: color-mix(in srgb, var(--bhcl-gray-50) 45%, transparent) !important;
+	border-top-color: color-mix(in srgb, var(--bhcl-gray-200) 55%, transparent);
+}
+
+.modal-backdrop.show {
+	background: var(--bhcl-scrim);
+	opacity: 1;
+}
+
+/* ---------- Dark: contraste e hierarquia ---------- */
+
+[data-theme="dark"] .btn-default,
+[data-theme="dark"] .btn-secondary {
+	background: var(--control-bg);
+	color: var(--bhcl-ink);
+	border-color: var(--bhcl-line);
+}
+
+[data-theme="dark"] .btn-primary {
+	background: var(--bhcl-teal-400) !important;
+	border-color: var(--bhcl-teal-400) !important;
+	color: #04211f !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .input-with-feedback,
+[data-theme="dark"] select.form-control,
+[data-theme="dark"] .navbar .search-bar input,
+[data-theme="dark"] .navbar #navbar-search {
+	background: var(--control-bg) !important;
+	color: var(--bhcl-ink) !important;
+	border-color: var(--bhcl-line) !important;
+}
+
+[data-theme="dark"] .navbar .search-bar input::placeholder,
+[data-theme="dark"] .navbar #navbar-search::placeholder {
+	color: var(--bhcl-muted);
+	opacity: 1;
+}
+
+[data-theme="dark"] .list-row:hover,
+[data-theme="dark"] .list-row-head {
+	background: color-mix(in srgb, var(--bhcl-teal-100) 55%, transparent);
+}
+
+[data-theme="dark"] .widget,
+[data-theme="dark"] #page-Workspaces .widget {
+	background: var(--bhcl-widget-bg) !important;
+	border-color: var(--bhcl-line) !important;
+	/* Sem color:!important aqui — herança força texto claro em tiles
+	   de alerta com fundo claro (ex.: indicadores jurídicos). */
+	box-shadow: 0 8px 24px rgb(0 0 0 / 28%), inset 0 1px 0 rgb(255 255 255 / 6%) !important;
+}
+
+[data-theme="dark"] .widget .widget-title,
+[data-theme="dark"] .widget .widget-head,
+[data-theme="dark"] .title-area .title-text,
+[data-theme="dark"] .ce-header,
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4 {
+	color: var(--bhcl-ink) !important;
+}
+
+[data-theme="dark"] .widget .widget-subtitle,
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .help,
+[data-theme="dark"] .desk-sidebar .standard-sidebar-label {
+	color: var(--bhcl-muted) !important;
+}
+
+/* Number cards: rótulo legível, número em destaque */
+[data-theme="dark"] .widget.number-widget-box .widget-title,
+[data-theme="dark"] .widget.number-widget-box .number-card-label,
+[data-theme="dark"] .widget.number-widget-box .ellipsis {
+	color: var(--bhcl-muted-2) !important;
+}
+
+[data-theme="dark"] .widget.number-widget-box .widget-content .number,
+[data-theme="dark"] .widget.number-widget-box .number-card-value {
+	color: var(--bhcl-ink) !important;
+}
+
+/* Atalhos: superfície elevada, texto claro */
+[data-theme="dark"] #page-Workspaces .widget.shortcut-widget-box {
+	background: #243036 !important;
+	border-color: var(--bhcl-line) !important;
+}
+
+[data-theme="dark"] #page-Workspaces .widget.shortcut-widget-box .widget-title {
+	color: var(--bhcl-ink) !important;
+}
+
+[data-theme="dark"] #page-Workspaces .widget.shortcut-widget-box:hover {
+	background: #2a383f !important;
+	border-color: var(--bhcl-teal-300) !important;
+	box-shadow: 0 8px 22px rgb(0 0 0 / 35%) !important;
+	transform: translateY(-1px);
+}
+
+/* Links / Reports & Masters */
+[data-theme="dark"] .widget.links-widget-box .widget-head {
+	border-bottom-color: var(--bhcl-line) !important;
+}
+
+[data-theme="dark"] .widget.links-widget-box .widget-head .widget-label .widget-title {
+	color: var(--bhcl-teal-500) !important;
+}
+
+[data-theme="dark"] .widget.links-widget-box .link-item,
+[data-theme="dark"] .widget.links-widget-box .link-content,
+[data-theme="dark"] .widget.links-widget-box a {
+	color: var(--bhcl-ink-soft) !important;
+}
+
+[data-theme="dark"] .widget.links-widget-box .link-item:hover {
+	background: color-mix(in srgb, var(--bhcl-teal-100) 65%, transparent) !important;
+}
+
+[data-theme="dark"] .widget.links-widget-box .link-item:hover .link-content {
+	color: var(--bhcl-ink) !important;
+}
+
+/* Sidebar */
+[data-theme="dark"] .desk-sidebar .standard-sidebar-item .sidebar-item-label,
+[data-theme="dark"] .desk-sidebar .item-anchor {
+	color: var(--bhcl-ink-soft) !important;
+}
+
+[data-theme="dark"] .desk-sidebar .standard-sidebar-item:hover {
+	background-color: color-mix(in srgb, var(--bhcl-teal-100) 70%, transparent) !important;
+}
+
+[data-theme="dark"] .desk-sidebar .standard-sidebar-item.selected {
+	background-color: color-mix(in srgb, var(--bhcl-teal-100) 90%, transparent) !important;
+	--icon-stroke: var(--bhcl-teal-500);
+	box-shadow: inset 3px 0 0 var(--bhcl-teal-400);
+}
+
+[data-theme="dark"] .desk-sidebar .standard-sidebar-item.selected .sidebar-item-label {
+	color: var(--bhcl-teal-600) !important;
+	font-weight: 600;
+}
+
+/* Gráficos: eixos e legendas legíveis */
+[data-theme="dark"] .frappe-chart .chart-legend text,
+[data-theme="dark"] .frappe-chart .axis text,
+[data-theme="dark"] .frappe-chart .chart-label,
+[data-theme="dark"] .chart-container text {
+	fill: var(--bhcl-muted-2) !important;
+}
+
+[data-theme="dark"] .frappe-chart .axis line,
+[data-theme="dark"] .frappe-chart .axis path,
+[data-theme="dark"] .frappe-chart .tick line {
+	stroke: color-mix(in srgb, var(--bhcl-line) 80%, transparent) !important;
+}
+
+[data-theme="dark"] .graph-svg-tip {
+	background: var(--bhcl-glass-menu-fallback) !important;
+	border: 1px solid var(--bhcl-line);
+	box-shadow: var(--bhcl-shadow-glass);
+	color: var(--bhcl-ink) !important;
+}
+
+[data-theme="dark"] .indicator-pill {
+	color: var(--bhcl-ink);
+}
+
+/* Faixa de ação BHCL: sem laranja gritante */
+[data-theme="dark"] .bhcl-action-bar {
+	background: color-mix(in srgb, var(--bhcl-teal-100) 85%, #3d2a14) !important;
+	color: var(--bhcl-teal-800) !important;
+	border-bottom: 1px solid var(--bhcl-line);
+}
+
+[data-theme="dark"] .bhcl-action-bar .btn,
+[data-theme="dark"] .bhcl-action-bar .btn-default {
+	background: color-mix(in srgb, var(--bhcl-teal-200) 50%, transparent) !important;
+	color: var(--bhcl-ink) !important;
+	border-color: var(--bhcl-line) !important;
+}
+
+[data-theme="dark"] .bhcl-action-bar .btn-primary,
+[data-theme="dark"] .bhcl-action-bar .btn.btn-primary {
+	background: var(--bhcl-teal-400) !important;
+	color: #04211f !important;
+	border-color: var(--bhcl-teal-400) !important;
+}
+
+/* Layout / page head */
+[data-theme="dark"] #page-Workspaces .layout-main-section,
+[data-theme="dark"] .layout-main-section,
+[data-theme="dark"] .frappe-card {
+	background: color-mix(in srgb, var(--bhcl-widget-bg) 92%, transparent) !important;
+	border-color: var(--bhcl-line) !important;
+}
+
+[data-theme="dark"] .page-head,
+[data-theme="dark"] .navbar,
+[data-theme="dark"] .layout-side-section {
+	border-color: var(--bhcl-line) !important;
+}
+
+[data-theme="dark"] .navbar .nav-link,
+[data-theme="dark"] .navbar .dropdown-toggle {
+	color: var(--bhcl-muted-2);
+}
+
+[data-theme="dark"] .dropdown-item {
+	color: var(--bhcl-ink-soft) !important;
+}
+
+[data-theme="dark"] .dropdown-divider {
+	border-color: var(--bhcl-line) !important;
+}
+
+[data-theme="dark"] .footer-message,
+[data-theme="dark"] .page-footer {
+	color: var(--bhcl-muted);
+}
+
+/* Contraste .ind-alerta: ver ind_tiles.css (SSOT compartilhado). */
+
+/* ---------- Acessibilidade ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+	.navbar,
+	.page-head,
+	.layout-side-section,
+	.widget,
+	#page-Workspaces .widget,
+	.modal-content,
+	.dropdown-menu,
+	.popover,
+	.awesomplete > ul {
+		transition: none;
+	}
+}

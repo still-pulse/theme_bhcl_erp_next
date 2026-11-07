@@ -3,6 +3,14 @@
 Histórico reconstruído de `git tag` e `git log` do app (somente leitura) e conferido com os arquivos; as entradas
 descrevem o assunto das mensagens de commit e do diff, e nada além disso. As datas são as do commit marcado pela tag.
 
+## v2.0.0 — experimento Desk Liquid Glass · (feature/desk-liquid-glass)
+
+Branch `feature/desk-liquid-glass`. Overlay CSS `desk_liquid_glass.css` (tokens glass/teal do portal
+espelhados no Desk): canvas ambiental, navbar/sidebar/page-head/cards; menus/dropdowns/popovers
+jateados; widgets translúcidos sem blur (tooltips de gráfico); tema escuro revisado; spacer
+discreto; `ind_tiles.css` como SSOT de contraste dos tiles `.ind-alerta` (Jurídico/SESMT/…).
+Sem mudança de login ou traduções. Major 2.x pela regra `feature/*` = major da `main` + 1.
+
 ## Limites do histórico git
 
 - **Início do histórico:** o repositório tem 10 commits e **uma raiz**, `d9c7cdc` (2026-09-02, "Merge pull request #1
