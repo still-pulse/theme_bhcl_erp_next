@@ -9,7 +9,10 @@ Branch `feature/desk-liquid-glass`. Overlay CSS `desk_liquid_glass.css` (tokens 
 espelhados no Desk): canvas ambiental, navbar/sidebar/page-head/cards; menus/dropdowns/popovers
 jateados; widgets translúcidos sem blur (tooltips de gráfico); tema escuro revisado; spacer
 discreto; `ind_tiles.css` como SSOT de contraste dos tiles `.ind-alerta` (Jurídico/SESMT/…).
-Sem mudança de login ou traduções. Major 2.x pela regra `feature/*` = major da `main` + 1.
+Major 2.x pela regra `feature/*` = major da `main` + 1.
+
+No `/login`, link **"Entrar com CPF"** para `/entrar` (área logada do colaborador no `bhcl_site`),
+abaixo do botão Entrar — quick win do benchmark da área logada (2026-11-07).
 
 ## Limites do histórico git
 

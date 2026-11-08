@@ -38,7 +38,8 @@ Repositório: [still-pulse/theme_bhcl_erp_next](https://github.com/still-pulse/t
 - **Login customizado** (`www/login.html` + `www/login.py`): tela de duas colunas em HTML e estilos inline, com faixa
   "portal exclusivo dos projetos vinculados ao Núcleo Alphaville", menu (Trabalhe Conosco, Institucional, Unidades),
   logotipo (`public/images/bhcl_logo.png`) e rodapé com Termos e Privacidade. O formulário autentica por
-  `POST /` com `cmd=login`, mostra/oculta a senha e respeita `redirect-to`. `login.py` não deixa a página em cache e
+  `POST /` com `cmd=login`, mostra/oculta a senha e respeita `redirect-to`. Abaixo de Entrar há o link
+  **Entrar com CPF** → `/entrar` (Minha área / `bhcl_site`). `login.py` não deixa a página em cache e
   redireciona quem já está logado (para `redirect-to`, o caminho padrão do app, `/app` ou a home do site para
   Website User).
 - **Traduções pt-BR** (`translations/pt-BR.csv` e `pt.csv`): **745 entradas** cada (747 linhas; algumas têm quebra de
