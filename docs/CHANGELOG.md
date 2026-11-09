@@ -3,6 +3,14 @@
 Histórico reconstruído de `git tag` e `git log` do app (somente leitura) e conferido com os arquivos; as entradas
 descrevem o assunto das mensagens de commit e do diff, e nada além disso. As datas são as do commit marcado pela tag.
 
+## v2.0.1 — correção de menus e sidebar mobile (Liquid Glass)
+
+Menus contextuais (`.dropdown-menu`, popover, awesomplete) com fundo sólido nos temas claro e escuro: o
+backdrop-filter do `.page-head` deixava o menu "Ações"/"..." translúcido, com o card do relatório visível por
+cima. Causa no query-report: o Frappe zera o `position` do `.page-head` (`#page-query-report .page-head`), então o
+z-index não valia; agora `relative` ali. `.page-head` com z-index 100, `.dropdown-menu` com z-index 1050 e rolagem vertical restaurada. Sidebar
+mobile (≤991px) sem backdrop-filter na seção, para o painel não ficar preso abaixo do conteúdo.
+
 ## v2.0.0 — experimento Desk Liquid Glass · (feature/desk-liquid-glass)
 
 Branch `feature/desk-liquid-glass`. Overlay CSS `desk_liquid_glass.css` (tokens glass/teal do portal
