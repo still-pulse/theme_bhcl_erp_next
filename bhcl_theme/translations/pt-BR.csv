@@ -745,3 +745,8 @@ Usado em Impostos e Taxas"
 "If checked, the tax amount will be considered as already included in the Print Rate / Print Amount","Se marcado, o valor do imposto será considerado como já incluído no preço / valor de impressão"
 "If checked, the tax amount will be considered as already included in the Paid Amount in Payment Entry","Se marcado, o valor do imposto será considerado como já incluído no valor pago do Lançamento de Pagamento"
 "Accounting Dimensions ","Dimensões Contábeis"
+Page Break,Quebra de Página
+Use HTML,Usar HTML
+Instructions,Instruções
+References,Referências
+Print Language,Idioma de Impressão
